@@ -2,11 +2,19 @@
 
 class CRUD extends PDO{
     public function __construct() {
-        parent::__construct('mysql:host=localhost; dbname=sensitive; port=3306; charset=utf8',
+        parent::__construct('mysql:host=localhost; dbname=; port=3306; charset=utf8',
     'root', '');
     }
 
 
+    /**
+     * Select all records from a specified table in the database and return them as an array.
+     *
+     * @param string $table The name of the table to select records from.
+     * @param string $field The field to order by (default is 'id').
+     * @param string $order The order of the results ('ASC' by default).
+     * @return array An array containing all the selected records.
+     */
     public function select($table, $field= 'id', $order = 'ASC'){
         $sql = "SELECT * FROM $table ORDER BY $field $order";
         $stmt = $this->query($sql);

@@ -6,9 +6,12 @@ $crud = new CRUD;
 
 $update = $crud->update('etudiant', $_POST);
 
+print_r($update);
 
 if($update){
-    header('location: '.$_SERVER['HTTP_REFERER']); // Retourne toujours vers la page précédente.
+
+    header('location: index.php');
+    // header('location: '.$_SERVER['HTTP_REFERER']); // Retourne toujours vers la page précédente.
 
 }else{
     echo 'Error' ;

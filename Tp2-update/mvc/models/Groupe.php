@@ -9,8 +9,8 @@ class Groupe extends CRUD {
 
     public function getProfessors($gid) {
         $sql = "SELECT 
-                    prof.name AS professor_name,
-                    prof.email AS professor_email
+                    prof.name,
+                    prof.email
                 FROM 
                     groupe
                 JOIN 

@@ -4,17 +4,34 @@ namespace App\Controllers;
 use App\Models\Groupe;
 use App\Providers\View;
 use App\Providers\Validator;
+use App\Providers\Auth;
+
 
 class GroupeController {
     
     public function index() {
-        // echo "This is the Groupe index!";
-        $groupe = new Groupe;
-        $select = $groupe->select();
-        View::render('groupe/index', ['groupes' => $select]);
+        if(Auth::session()){
+            $groupe = new Groupe;
+            $select = $groupe->select('name');
+            if($select){
+                return View::render('groupe/index', ['groupes'=> $select]);
+            }
+            return View::render('error');
+        }
+        // $groupe = new Groupe;
+        // $select = $groupe->select();
+        // View::render('groupe/index', ['groupes' => $select]);
     }
 
+
+
+    /**
+     * Renders the create view of a groupe
+     *
+     * @return void
+     */
     public function create() {
+        Auth::session();
         View::render('groupe/create');
     }
 
@@ -24,6 +41,7 @@ class GroupeController {
             $selectId = $groupe->selectId($data['id']);
             if($selectId){
                 $professors = $groupe->getProfessors($data['id']);
+
                 $student_count = $groupe->getStudentCount($data['id']);
                 
                 return View::render('groupe/show', [
@@ -41,6 +59,7 @@ class GroupeController {
     
 
     public function edit($data = []){
+        Auth::session();
         if(isset($_GET['id']) && $data['id'] != null){
             $groupe = new Groupe;
             $selectId = $groupe->selectId($data['id']);

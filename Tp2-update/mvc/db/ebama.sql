@@ -89,3 +89,26 @@ CREATE TABLE etudiant_has_groupe_has_cours (
         REFERENCES groupe_has_cours(groupe_gid, cours_cid)
 );
 
+
+CREATE TABLE privilege (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    privilege VARCHAR(50) NOT NULL
+);
+
+INSERT INTO privilege (privilege) VALUES ('Teacher');
+INSERT INTO privilege (privilege) VALUES ('Student');
+INSERT INTO privilege (privilege) VALUES('Admin');
+
+
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    privilege_id INT NOT NULL,
+    image VARCHAR(15),
+    CONSTRAINT fk_privilege_id FOREIGN KEY (privilege_id) REFERENCES privilege(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

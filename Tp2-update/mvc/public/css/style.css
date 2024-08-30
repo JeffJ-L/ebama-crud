@@ -40,6 +40,24 @@ h2 {
     font-size: 1.8em;
 }
 
+
+/* Style photo de profil */
+.medaillon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.medaillon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 /* Links */
 a {
     color: #1d2c3c;
@@ -56,6 +74,10 @@ a:hover {
 nav {
     background-color: #333;
     padding: 10px;
+}
+
+ul {
+    list-style: none;
 }
 
 
@@ -140,8 +162,9 @@ form textarea {
     font-size: 1em;
 }
 
-form input[type="text"] {
+form input[type="text"], form input[type="email"], form input[type="password"] {
     height: 40px;
+    padding: 10px;
 }
 
 form textarea {
